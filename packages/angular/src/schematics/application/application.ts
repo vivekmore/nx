@@ -625,7 +625,7 @@ function addProxyConfig(options: NormalizedSchema): Rule {
       const pathToProxyFile = `${projectConfig.root}/proxy.conf.json`;
 
       return chain([
-        updateJsonInTree(pathToProxyFile, (json) => {
+        updateJsonInTree(pathToProxyFile, () => {
           return {
             [`/${options.backendProject}`]: {
               target: 'http://localhost:3333',
@@ -812,7 +812,7 @@ function normalizeOptions(host: Tree, options: Schema): NormalizedSchema {
     : names(options.name).fileName;
 
   const appProjectName = appDirectory.replace(new RegExp('/', 'g'), '-');
-  const e2eProjectName = `${names(options.name).fileName}-e2e`;
+  const e2eProjectName = `${appProjectName}-e2e`;
   const appProjectRoot = `${appsDir(host)}/${appDirectory}`;
   const e2eProjectRoot = `${appProjectRoot}-e2e`;
 
