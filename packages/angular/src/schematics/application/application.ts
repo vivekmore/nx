@@ -811,14 +811,10 @@ function normalizeOptions(host: Tree, options: Schema): NormalizedSchema {
     ? `${names(options.directory).fileName}/${names(options.name).fileName}`
     : names(options.name).fileName;
 
-  let e2eProjectName = `${names(options.name).fileName}-e2e`;
   const appProjectName = appDirectory.replace(new RegExp('/', 'g'), '-');
-  if (options.e2eTestRunner !== 'cypress') {
-    e2eProjectName = `${appProjectName}-e2e`;
-  }
-
+  const e2eProjectName = `${names(options.name).fileName}-e2e`;
   const appProjectRoot = `${appsDir(host)}/${appDirectory}`;
-  const e2eProjectRoot = `${appsDir(host)}/${appDirectory}-e2e`;
+  const e2eProjectRoot = `${appProjectRoot}-e2e`;
 
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
